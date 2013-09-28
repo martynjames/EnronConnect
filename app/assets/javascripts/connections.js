@@ -16,11 +16,20 @@ $(function(){
         person1 : person1,
         person2 : person2
       };
+
+      $('body').css('cursor', 'wait');
+
       $.ajax({
         url : '/connect',
         data: people,
         dataType: 'json',
         success: function(data){
+          $('body').css( 'cursor', 'default' );
+
+          if(data.length < 1){
+            $('#separation_number').text("more than 3");
+            return;
+          }
           $('#separation_number').text(data.length - 1);
           for(var i=0; i < data.length; ++i){
             var the_name = $('<span/>');
@@ -31,6 +40,7 @@ $(function(){
           $('.connections, .desc').show();
         },
         error : function(jqXHR, textStatus, errorThrown) {
+          $('body').css( 'cursor', 'default' );
           console.log("Failed ajax request - Status: " + textStatus + ", Error: " + errorThrown);
         }
       });
