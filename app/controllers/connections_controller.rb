@@ -18,7 +18,7 @@ class ConnectionsController < ApplicationController
       return [start_person, end_person]
     end
     connection_map = {end_person => end_person}
-    build_connection_map(connection_map, start_person, end_person)
+    build_out_tier(connection_map, start_person, [end_person])
     current_person = start_person
     connection_list = []
     while (current_person != end_person)
@@ -29,28 +29,29 @@ class ConnectionsController < ApplicationController
     return connection_list
   end
 
-  def build_connection_map(connection_map, start_person, to_person)
-    print "build_connection from #{start_person} => #{to_person}\n"
-    immediate_connections = get_immediate_connections_to(to_person)
-    need_to_check = []
-    if immediate_connections.nil?
+  def build_out_tier(connection_map, start_person, tier_list)
+    print "build_connection from #{start_person} => #{tier_list}\n"
+    new_tier = []
+    for tier_item in tier_list
+      immediate_connections = get_immediate_connections_to(tier_item)
+      if immediate_connections.nil?
+        next
+      end
+      for conn in immediate_connections
+        if connection_map[conn].nil?
+          connection_map[conn] = tier_item
+          new_tier.push(conn)
+        end
+        if conn == start_person
+          return
+        end
+      end
+    end
+    if new_tier.nil?
       return
     end
-    for conn in immediate_connections
-      if connection_map[conn].nil?
-        connection_map[conn] = to_person
-        need_to_check.push(conn)
-      end
-      if conn == start_person
-        return
-      end
-    end
-    if need_to_check.nil?
-      return
-    end
-    for conn in need_to_check
-      build_connection_map(connection_map, start_person, conn)
-    end
+    new_tier.uniq!()
+    build_out_tier(connection_map, start_person, new_tier)
   end
 
   def get_immediate_connections_to(person)
