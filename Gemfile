@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'oj'
 gem 'elasticsearch'
 gem 'hashie'
 

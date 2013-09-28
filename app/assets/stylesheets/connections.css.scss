@@ -1,3 +1,25 @@
-// Place all the styles related to the Connections controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.desc{
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  display: none;
+}
+.connections{
+  display: none;
+  .name{
+    display: block;
+    &:first-child{
+      color: red;
+    }
+    &:last-child{
+      color: green;
+    }
+  }
+  .name + .name{
+    margin-left: 10px;
+    &::before{
+      content: '->';
+      color: black;
+    }
+  }
+}
