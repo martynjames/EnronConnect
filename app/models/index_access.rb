@@ -23,7 +23,7 @@ end
 
 class Enron
   @@es = Elasticsearch::Client.new hosts: ['cluster-7-slave-00.sl.hackreduce.net:9200']
-  
+
   def self.get(hash_args)
     query_hash = hash_args.merge({:index =>"enron"})
     @@es.get query_hash
@@ -66,6 +66,6 @@ end
 #query_from = QB.wildcard({:content => '*chosen to leave Enron*'})
 #puts query_from
 #query_from = {:query => {:match_all => {}}}
-# look for term 
+# look for term
 #x = Hashie::Mash.new(Enron.query(query_from))
 
