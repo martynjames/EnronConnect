@@ -4,7 +4,7 @@ module ConnectionsHelper
   end
 
   def all_emails
-  	[['martyn@hopper.com', 'martyn@hopper.com'], ['pxu@carbonite.com', 'pxu@carbonite.com']]
+  	[['mark.greenberg@enron.com', 'mark.greenberg@enron.com'], ['rex.shelby@enron.com', 'rex.shelby@enron.com']]
   end
   
 end

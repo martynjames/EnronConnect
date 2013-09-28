@@ -10,7 +10,7 @@ class ConnectionsController < ApplicationController
     person1 = params[:person1]
     person2 = params[:person2]
 
-    render :json => Oj.dump([person1, 'interim@enron.com', person2])
+    render :json => Oj.dump(get_connections_between(person1, person2))
   end
 
   def get_connections_between(start_person, end_person)
