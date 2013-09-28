@@ -1,2 +1,12 @@
-<h1>Connections#index</h1>
-<p>Find me in app/views/connections/index.html.erb</p>
+<h1>Shortest Connection</h1>
+<p>Enter 2 names to find a shortest email connection between the two</p>
+<div class="choose_names">
+  Connect
+  <select id="person1">
+    <%= all_user_options %>
+  </select>
+  to
+  <select id="person2">
+    <%= all_user_options %>
+  </select>
+</div>
